@@ -18,7 +18,7 @@ Route::group([
     Route::post('/login', [AuthController::class, 'login'])->name('login');
     Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:api')->name('logout');
     Route::post('/refresh', [AuthController::class, 'refresh'])->middleware('auth:api')->name('refresh');
-    Route::post('/me', [AuthController::class, 'me'])->middleware('auth:api')->name('me');
+    Route::get('/me', [AuthController::class, 'me'])->middleware('auth:api')->name('me');
     Route::post('/verify-email', [AuthController::class, 'verify'])->name('verify');
 });
 Route::middleware('auth:api')->group(function () {
@@ -40,6 +40,7 @@ Route::middleware('auth:api')->group(function () {
 Route::middleware('auth:api')->group(function () {
     Route::post('/profiles/create', [ProfileController::class, 'createProfile']);
     Route::patch('/update-profile', [ProfileController::class, 'updateProfile']);
+    Route::get('/profile', [ProfileController::class, 'getProfile']);
    
 });
 Route::get('/photo/{folder}/{filename}', [ProfileController::class, 'getPhoto'])
